@@ -84,3 +84,8 @@ services:
     depends_on:
       - kafka-0
 
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:v1.6.0
+    command: --kafka.server kafka:9092
+    ports:
+      - 9308:9308
