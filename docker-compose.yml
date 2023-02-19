@@ -6,7 +6,7 @@ services:
       ALLOW_ANONYMOUS_LOGIN: 'yes'
 
   kafka-1:
-    image: bitnami/kafka:3.4.0
+    build: kafka
     environment:
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9081
@@ -23,7 +23,7 @@ services:
       - zookeeper
 
   kafka-2:
-    image: bitnami/kafka:3.4.0
+    build: kafka
     environment:
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9082
@@ -45,7 +45,7 @@ services:
       - zookeeper
 
   kafka-3:
-    image: bitnami/kafka:3.4.0
+    build: kafka
     environment:
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9083
