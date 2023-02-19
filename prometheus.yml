@@ -30,6 +30,7 @@ scrape_configs:
     static_configs:
       - targets:
           - "zookeeper:80"
+          - "zookeeper:7000"
         labels:
           env: "dev"
     relabel_configs:
