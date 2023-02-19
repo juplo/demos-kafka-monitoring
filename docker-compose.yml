@@ -1,5 +1,7 @@
 version: '3.2'
+
 services:
+
   zookeeper:
     image: bitnami/zookeeper:latest
     environment:
@@ -66,3 +68,10 @@ services:
     command: --kafka.server kafka:9092
     ports:
       - 9308:9308
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
