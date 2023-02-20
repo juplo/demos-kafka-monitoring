@@ -63,6 +63,27 @@ services:
     depends_on:
       - zookeeper
 
+  setup:
+    image: juplo/toolbox
+    command: >
+      bash -c "
+        kafka-topics --bootstrap-server kafka:9092 --delete --if-exists --topic test
+        kafka-topics --bootstrap-server kafka:9092 --create --topic test --partitions 2 --replication-factor 3 --config min.insync.replicas=2
+        kafka-topics --bootstrap-server kafka:9092 --describe --topic test
+      "
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+
+  cli:
+    image: juplo/toolbox
+    command: sleep infinity
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+
   kafka-exporter:
     image: danielqsj/kafka-exporter:v1.6.0
     command: --kafka.server kafka:9092
@@ -82,6 +103,14 @@ services:
       - "3000:3000"
     volumes:
       - grafana:/var/lib/grafana
+
+  producer:
+    image: juplo/simple-producer:1.0-SNAPSHOT
+    command: kafka:9092 test producer
+
+  consumer:
+    image: juplo/simple-consumer:1.0-SNAPSHOT
+    command: kafka:9092 test my-group consumer
 
 volumes:
 
