@@ -84,6 +84,13 @@ services:
       - kafka-2
       - kafka-3
 
+  kafka-lag-exporter:
+    image: seglo/kafka-lag-exporter:0.8.2
+    volumes:
+      - ./kafka-lag-exporter.conf:/opt/docker/conf/application.conf:ro
+    ports:
+      - 8000:8000
+
   kafka-exporter:
     image: danielqsj/kafka-exporter:v1.6.0
     command: --kafka.server kafka:9092
