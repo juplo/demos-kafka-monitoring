@@ -84,6 +84,13 @@ services:
       - kafka-2
       - kafka-3
 
+  burrow:
+    build: burrow
+    volumes:
+      - ./burrow.conf:/app/burrow.toml:ro
+    ports:
+      - 8080:8080
+
   kafka-lag-exporter:
     image: seglo/kafka-lag-exporter:0.8.2
     volumes:
