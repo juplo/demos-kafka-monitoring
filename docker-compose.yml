@@ -96,6 +96,8 @@ services:
     environment:
       BURROW_ADDR: http://burrow:8080
       API_VERSION: 3
+    ports:
+      - 8008:8080
 
   kafka-lag-exporter:
     image: seglo/kafka-lag-exporter:0.8.2
