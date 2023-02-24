@@ -1,8 +1,8 @@
 FROM golang:1.14.0-alpine as golang
 RUN apk update
 RUN apk add git
+run git clone https://github.com/jirwin/burrow_exporter.git /go/src/github.com/jirwin/burrow_exporter
 WORKDIR /go/src/github.com/jirwin/burrow_exporter
-run git clone https://github.com/jirwin/burrow_exporter.git .
 RUN go build
 
 FROM alpine:3.9
