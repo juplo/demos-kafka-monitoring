@@ -6,6 +6,8 @@ services:
     build: zookeeper
     environment:
       ALLOW_ANONYMOUS_LOGIN: 'yes'
+    volumes:
+      - zookeeper:/bitnami/zookeeper
 
   kafka-1:
     build: kafka
@@ -19,6 +21,8 @@ services:
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-1:/bitnami/kafka
     ports:
       - 9081:9081
     depends_on:
@@ -36,6 +40,8 @@ services:
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-2:/bitnami/kafka
     ports:
       - 9092:9082
       - 9082:9082
@@ -58,6 +64,8 @@ services:
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: BROKER
       KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-3:/bitnami/kafka
     ports:
       - 9083:9083
     depends_on:
@@ -136,4 +144,8 @@ services:
 
 volumes:
 
+  zookeeper:
+  kafka-1:
+  kafka-2:
+  kafka-3:
   grafana:
