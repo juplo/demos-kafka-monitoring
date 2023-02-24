@@ -91,6 +91,14 @@ services:
     ports:
       - 8080:8080
 
+  burrow_exporter:
+    build: burrow_exporter
+    environments:
+      BURROW_ADDR: burrow:8080
+      API_VERSION: 3
+    ports:
+      - 8080:8080
+
   kafka-lag-exporter:
     image: seglo/kafka-lag-exporter:0.8.2
     volumes:
