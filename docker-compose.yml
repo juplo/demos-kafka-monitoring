@@ -93,7 +93,7 @@ services:
 
   burrow_exporter:
     build: burrow_exporter
-    environments:
+    environment:
       BURROW_ADDR: burrow:8080
       API_VERSION: 3
     ports:
