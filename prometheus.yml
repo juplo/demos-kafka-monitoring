@@ -25,7 +25,6 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-
   - job_name: "zookeeper"
     static_configs:
       - targets:
@@ -39,13 +38,24 @@ scrape_configs:
         regex: '([^:]+)(:[0-9]+)?'
         replacement: '${1}'
 
-
   - job_name: "kafka-broker"
     static_configs:
       - targets:
           - "kafka-1:80"
           - "kafka-2:80"
           - "kafka-3:80"
+        labels:
+          env: "dev"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: hostname
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
+
+  - job_name: "burrow-exporter"
+    static_configs:
+      - targets:
+          - "burrow_exporter:8080"
         labels:
           env: "dev"
     relabel_configs:
