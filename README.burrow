@@ -1,0 +1,6 @@
+Dashboards:
+
+Kacke: docker run --name foo --rm --net monitoring_default -e BURROW_BACKEND=http://burrow:8080 -p 8888:80 joway/burrow-dashboard
+Gesperrt: docker run --name foo --rm --net monitoring_default -e BURROW_HOME=http://burrow:8080/v3/kafka -p 8888:3000 generalmills/burrowui
+
+
