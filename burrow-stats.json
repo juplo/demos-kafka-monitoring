@@ -1,16 +1,10 @@
 {
   "consumers": [
     {
-      "name": "consumer_name_1",
-      "status": "http://burrow-host:8000/v2/kafka/cluster_name/consumer/consumer_name_1/status",
-      "consumer_group_offset": "http://burrow-host:8000/v2/kafka/cluster_name/consumer/consumer_name_1/topic/topic_name_1",
-      "topic_offset": "http://burrow-host:8000/v2/kafka/cluster_name/topic/topic_name_1"
-    },
-    {
-      "name": "consumer_name_2",
-      "status": "http://burrow-host:8000/v2/kafka/cluster_name/consumer/consumer_name_2/status",
-      "consumer_group_offset": "http://burrow-host:8000/v2/kafka/cluster_name/consumer/consumer_name_2/topic/topic_name_2",
-      "topic_offset": "http://burrow-host:8000/v2/kafka/cluster_name/topic/topic_name_2"
+      "name": "my-group",
+      "status": "http://burrow:8080/v3/kafka/local/consumer/my-group/status",
+      "consumer_group_offset": "http://burrow:8080/v3/kafka/local/consumer/my-group/topic/test",
+      "topic_offset": "http://burrow:8080/v3/kafka/local/topic/test"
     }
   ],
   "chartOptions": {
