@@ -5,13 +5,25 @@ services:
   zookeeper:
     build: zookeeper
     environment:
+      JVMFLAGS:
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7070
+        -Dcom.sun.management.jmxremote.authenticate=false
       ALLOW_ANONYMOUS_LOGIN: 'yes'
+      ZOO_ENABLE_PROMETHEUS_METRICS: 'yes'
     volumes:
       - zookeeper:/bitnami/zookeeper
+    ports:
+      - 2181:2181
+      - 7000:7070
 
   kafka-1:
     build: kafka
     environment:
+      KAFKA_OPTS:
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9081
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT, LOCALHOST:PLAINTEXT
@@ -25,12 +37,17 @@ services:
       - kafka-1:/bitnami/kafka
     ports:
       - 9081:9081
+      - 7001:7000
     depends_on:
       - zookeeper
 
   kafka-2:
     build: kafka
     environment:
+      KAFKA_OPTS:
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9082
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT, LOCALHOST:PLAINTEXT
@@ -45,6 +62,7 @@ services:
     ports:
       - 9092:9082
       - 9082:9082
+      - 7002:7000
     networks:
       default:
         aliases:
@@ -55,6 +73,10 @@ services:
   kafka-3:
     build: kafka
     environment:
+      KAFKA_OPTS:
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9083
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT, LOCALHOST:PLAINTEXT
@@ -68,6 +90,7 @@ services:
       - kafka-3:/bitnami/kafka
     ports:
       - 9083:9083
+      - 7003:7000
     depends_on:
       - zookeeper
 
