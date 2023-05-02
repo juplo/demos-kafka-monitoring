@@ -6,5 +6,4 @@ USER root
 RUN chmod -R 777 /opt/prometheus
 USER 1001
 
-ENV ZOO_ENABLE_PROMETHEUS_METRICS=true
-ENV JVMFLAGS=-javaagent:/opt/prometheus/jmx_prometheus_javaagent.jar=80:/opt/prometheus/config.yml
+ENV JVMFLAGS="-javaagent:/opt/prometheus/jmx_prometheus_javaagent.jar=80:/opt/prometheus/config.yml -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=7070 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"

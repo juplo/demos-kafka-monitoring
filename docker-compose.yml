@@ -5,10 +5,6 @@ services:
   zookeeper:
     build: zookeeper
     environment:
-      JVMFLAGS:
-        -Dcom.sun.management.jmxremote=true
-        -Dcom.sun.management.jmxremote.port=7070
-        -Dcom.sun.management.jmxremote.authenticate=false
       ALLOW_ANONYMOUS_LOGIN: 'yes'
       ZOO_ENABLE_PROMETHEUS_METRICS: 'yes'
     volumes:
