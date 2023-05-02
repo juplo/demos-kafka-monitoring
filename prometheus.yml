@@ -52,6 +52,18 @@ scrape_configs:
         regex: '([^:]+)(:[0-9]+)?'
         replacement: '${1}'
 
+  - job_name: "kafka-lag-exporter"
+    static_configs:
+      - targets:
+          - "kafka-lag-exporter:8000"
+        labels:
+          env: "dev"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: hostname
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
+
   - job_name: "burrow-exporter"
     static_configs:
       - targets:
