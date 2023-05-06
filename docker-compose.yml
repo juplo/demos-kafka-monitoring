@@ -155,11 +155,25 @@ services:
 
   producer:
     image: juplo/simple-producer:1.0-SNAPSHOT
+    entrypoint: java
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -jar /opt/app.jar
     command: kafka:9092 test producer
+    ports:
+      - 7010:7000
 
   consumer:
     image: juplo/simple-consumer:1.0-SNAPSHOT
+    entrypoint: java
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -jar /opt/app.jar
     command: kafka:9092 test my-group consumer
+    ports:
+      - 7020:7000
 
 volumes:
 
