@@ -158,7 +158,9 @@ services:
     entrypoint: java
         -Dcom.sun.management.jmxremote=true
         -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.local.only=false
         -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false
         -jar /opt/app.jar
     command: kafka:9092 test producer
     ports:
@@ -169,7 +171,9 @@ services:
     entrypoint: java
         -Dcom.sun.management.jmxremote=true
         -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.local.only=false
         -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false
         -jar /opt/app.jar
     command: kafka:9092 test my-group consumer
     ports:
