@@ -1,14 +1,14 @@
 global:
   # How frequently to scrape targets by default.
   # Default 15s
-  scrape_interval: 5s
+  scrape_interval: 1s
   # How frequently to evaluate rules.
   # Default 15s
-  evaluation_interval: 5s
+  evaluation_interval: 1s
   # How long until a scrape request times out.
   # Default to 10s.
   # Required because cp-demo is using cpu throttling, so let's leave enough time to fetch the metrics in particular for the first time as it needs to compile all rexps
-  scrape_timeout: 5s
+  scrape_timeout: 1s
 
 rule_files:
   - "alert.rules"
