@@ -1,4 +1,4 @@
-startDelaySeconds: 120
+startDelaySeconds: 10
 lowercaseOutputName: true
 lowercaseOutputLabelNames: true
 cacheRules: true
