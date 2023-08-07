@@ -167,7 +167,8 @@ services:
 
   producer:
     image: juplo/simple-producer:1.0-SNAPSHOT
-    entrypoint: java
+    entrypoint: >-
+        java
         -Dcom.sun.management.jmxremote=true
         -Dcom.sun.management.jmxremote.port=7000
         -Dcom.sun.management.jmxremote.local.only=false
@@ -180,7 +181,8 @@ services:
 
   consumer:
     image: juplo/simple-consumer:1.0-SNAPSHOT
-    entrypoint: java
+    entrypoint: >-
+        java
         -Dcom.sun.management.jmxremote=true
         -Dcom.sun.management.jmxremote.port=7000
         -Dcom.sun.management.jmxremote.local.only=false
