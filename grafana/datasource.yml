@@ -1,11 +1,11 @@
 apiVersion: 1
 
 deleteDatasources:
-  - name: PROMETHEUS
+  - name: Prometheus
     orgId: 1
 
 datasources:
-- name: PROMETHEUS
+- name: Prometheus
   type: prometheus
   url: http://prometheus:9090/
 

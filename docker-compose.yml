@@ -156,6 +156,9 @@ services:
     image: grafana/grafana:10.0.3
     ports:
       - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: juplo
+      GF_SECURITY_ADMIN_PASSWORD: juplo
     volumes:
       - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/automatic.yaml
