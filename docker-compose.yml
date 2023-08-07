@@ -153,10 +153,13 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:10.0.3
     ports:
       - "3000:3000"
     volumes:
+      - ./grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/automatic.yaml
+      - ./kafka-overview.json:/var/lib/grafana/dashboards/main-dashboard.json
       - grafana:/var/lib/grafana
 
   producer:
