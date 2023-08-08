@@ -96,18 +96,72 @@ services:
     depends_on:
       - zookeeper
 
+  kafka-4:
+    build: kafka
+    environment:
+      KAFKA_ENABLE_KRAFT: 'false'
+      KAFKA_OPTS:
+        -javaagent:/opt/prometheus/jmx_prometheus_javaagent.jar=80:/opt/prometheus/config.yml
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9084
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT, LOCALHOST:PLAINTEXT
+      KAFKA_CFG_ADVERTISED_LISTENERS: BROKER://kafka-3:9092, LOCALHOST://localhost:9084
+      KAFKA_BROKER_ID: 4
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-4:/bitnami/kafka
+    ports:
+      - 9084:9084
+      - 7004:7000
+    depends_on:
+      - zookeeper
+
+  kafka-5:
+    build: kafka
+    environment:
+      KAFKA_ENABLE_KRAFT: 'false'
+      KAFKA_OPTS:
+        -javaagent:/opt/prometheus/jmx_prometheus_javaagent.jar=80:/opt/prometheus/config.yml
+        -Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.port=7000
+        -Dcom.sun.management.jmxremote.authenticate=false
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: BROKER://:9092, LOCALHOST://:9085
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT, LOCALHOST:PLAINTEXT
+      KAFKA_CFG_ADVERTISED_LISTENERS: BROKER://kafka-3:9092, LOCALHOST://localhost:9085
+      KAFKA_BROKER_ID: 5
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "false"
+    volumes:
+      - kafka-5:/bitnami/kafka
+    ports:
+      - 9085:9085
+      - 7005:7000
+    depends_on:
+      - zookeeper
+
   setup:
     image: juplo/toolbox
     command: >
       bash -c "
         kafka-topics --bootstrap-server kafka:9092 --delete --if-exists --topic test
-        kafka-topics --bootstrap-server kafka:9092 --create --topic test --partitions 2 --replication-factor 3 --config min.insync.replicas=2
+        kafka-topics --bootstrap-server kafka:9092 --create --topic test --partitions 33 --replication-factor 3 --config min.insync.replicas=2
         kafka-topics --bootstrap-server kafka:9092 --describe --topic test
       "
     depends_on:
       - kafka-1
       - kafka-2
       - kafka-3
+      - kafka-4
+      - kafka-5
 
   cli:
     image: juplo/toolbox
@@ -116,6 +170,8 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+      - kafka-4
+      - kafka-5
 
   burrow:
     build: burrow
@@ -205,4 +261,6 @@ volumes:
   kafka-1:
   kafka-2:
   kafka-3:
+  kafka-4:
+  kafka-5:
   grafana:

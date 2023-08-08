@@ -44,6 +44,8 @@ scrape_configs:
           - "kafka-1:80"
           - "kafka-2:80"
           - "kafka-3:80"
+          - "kafka-4:80"
+          - "kafka-5:80"
         labels:
           env: "dev"
     relabel_configs:
