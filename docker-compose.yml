@@ -249,12 +249,6 @@ services:
     ports:
       - 7020:7000
 
-  cli:
-    image: juplo/toolbox
-    command: sleep infinity
-    depends_on:
-      - setup
-
 volumes:
 
   zookeeper:
