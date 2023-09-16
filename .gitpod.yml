@@ -1,3 +1,6 @@
+image:
+  file: .gitpod.dockerfile
 tasks:
-  - init: docker-compose pull
+  - name: docker-compose
+    init: docker-compose pull
     command: docker-compose up -d 
